@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Image on Mobile</title>
+    <title>Moving Image</title>
     <style>
         /* CSS 스타일 시트 */
 
@@ -35,20 +35,6 @@
     var directionY = 1; // 1 또는 -1로 설정하여 이동 방향을 변경할 수 있습니다.
     var speed = 5; // 이동 속도 (조절 가능)
 
-    // 화면 크기에 따라 이동 경계 설정
-    var maxX, maxY;
-
-    function updateBounds() {
-        maxX = window.innerWidth - movingImage.width;
-        maxY = window.innerHeight - movingImage.height;
-    }
-
-    // 화면 크기가 변경될 때 이벤트 리스너 등록
-    window.addEventListener('resize', updateBounds);
-
-    // 초기 경계 설정
-    updateBounds();
-
     // 애니메이션 함수
     function moveImage() {
         // 현재 위치 가져오기
@@ -60,16 +46,19 @@
         var newY = currentY + speed * directionY;
 
         // 이미지가 화면을 벗어나지 않도록 확인
+        var maxX = window.innerWidth - movingImage.width;
+        var maxY = window.innerHeight - movingImage.height;
+
         if (newX < 0 || newX > maxX) {
             // X 방향으로 부딪혔을 때 방향을 바꾸고 이미지 회전
             directionX *= -1;
-            movingImage.style.transform = 'rotate(85deg)';
+            movingImage.style.transform = 'rotate(65deg)';
         }
 
         if (newY < 0 || newY > maxY) {
             // Y 방향으로 부딪혔을 때 방향을 바꾸고 이미지 회전
-            directionY *= 1;
-            movingImage.style.transform = 'rotate(85deg)';
+            directionY *= -1;
+            movingImage.style.transform = 'rotate(-65deg)';
         }
 
         // 새로운 위치 적용
